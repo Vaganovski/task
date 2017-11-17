@@ -1,33 +1,24 @@
 <?php
 namespace Core;
-use PDO;
-
 
 class Model
 {
-    public function __construct($data=[]) {
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-    }
     
-    public static function __callStatic($name, $arguments) {
-        if (preg_match("/^findBy(?P<field>\w+)$/", $name, $matches)) {
-            $field = lcfirst($matches['field']);
+    public static function findBy($field, $value) 
+    {
+        if (is_string($field)) {
             $table = static::class;
             $table = lcfirst(substr($table, strrpos($table, '\\') + 1));
             $db = Database::getInstance();
             $stmt = $db->prepare("SELECT * FROM ".$table."s WHERE ".$field." = :".$field);
-            $stmt->bindParam(":".$field, $arguments[0]);
+            $stmt->bindParam(":".$field, $value);
             $stmt->execute();
-            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, static::class);
+            $user = $stmt->fetch();
 
-            if ($data) {
-                $user = new self($data);
-                return $user;
-            }
-
-            return $data;            
-        }
+            return $user;
+       
+        } 
+        return false;   
     }
 }

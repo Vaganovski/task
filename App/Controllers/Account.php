@@ -1,5 +1,6 @@
 <?php
-namespace app\controllers;
+namespace App\Controllers;
+
 use Core\View;
 use Core\Session;
 use App\Models\User;
@@ -7,25 +8,25 @@ use App\Models\Transaction;
 
 Class Account
 {
-    public function index() {
+    public function index() 
+    {
         $userId= Session::get('userId');
         
         if ($userId) {            
-            $user = User::findById($userId);
-            View::show("index.php",['balance' => $user->balance]);
+            $user = User::findBy('id', $userId);
+            View::show("index.php",['balance' => $user->balance/100]);
         } else {
             header('Location:login');
         }
     }
     
-    public function withdraw() {
-        
+    public function withdraw() 
+    {        
         $userId= Session::get('userId');
         
         if ($userId) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-                if (isset($_REQUEST["amount"]) && preg_match("/^\d+(\.\d+)?$/", $_REQUEST["amount"])) {
+                if (isset($_REQUEST["amount"]) && preg_match("/^\d+(\.\d{1,2})?$/", $_REQUEST["amount"])) {
                     $amount = $_REQUEST["amount"];
                     if ($amount > 0) {
                         $transaction = new Transaction($userId, -$amount);
@@ -34,7 +35,6 @@ Class Account
                 } else {
 
                 }
-
             }
             header('Location:/');
         } else {
@@ -42,8 +42,5 @@ Class Account
         }
         
     }
-
-    public function transactions() {
-        
-    }    
+    
 }

@@ -28,7 +28,7 @@ class Router
     public function dispatch($url)
     {
         if ($this->match($url)) {
-            $controller = "App\controllers\\".str_replace(' ', '', ucwords(str_replace('-', ' ', $this->params['controller'])));            
+            $controller = "App\Controllers\\".str_replace(' ', '', ucwords(str_replace('-', ' ', $this->params['controller'])));            
             if (class_exists($controller)) {
                 $controller_object = new $controller($this->params);
                 $action = lcfirst($this->params['action']);

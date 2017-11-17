@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
+
 use Core\Database;
-//use PDO;
 
 class Transaction extends \Core\Model
 {
@@ -10,17 +10,19 @@ class Transaction extends \Core\Model
     
     protected $amount;
     
-    public function __construct($userId, $amount) {
+    public function __construct($userId, $amount) 
+    {
         $this->userId = $userId;
         $this->amount = $amount;
 
     }
 
 
-    public function save() {
+    public function save() 
+    {
         if (isset($this->userId) && isset($this->amount)) {
             
-            $this->amount = round($this->amount, 2);
+            $this->amount = $this->amount*100;
             $db = Database::getInstance();
             try {
                 $db->beginTransaction();
@@ -37,11 +39,10 @@ class Transaction extends \Core\Model
                     $stmt->bindParam(':userId', $this->userId);
                     $stmt->bindParam(':amount', $this->amount);
                     $stmt->execute();
-                    $balance = $balance + $this->amount;
 
                     $stmt = $db->prepare("UPDATE users SET balance = :balance WHERE id=:userId");
                     $stmt->bindParam(':userId', $this->userId);
-                    $stmt->bindParam(':balance', $balance);
+                    $stmt->bindParam(':balance', $nb);
                     $stmt->execute();
 
                 }

@@ -7,7 +7,7 @@ class View
     public static function show($view, $args = [])
     {
         extract($args, EXTR_SKIP);
-        $file = "../App/views/$view";
+        $file = "../App/Views/$view";
         if (is_readable($file)) {
             require $file;
         } else {

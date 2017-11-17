@@ -1,5 +1,4 @@
 <?php
-
 namespace Core;
 
 class Error
@@ -11,7 +10,6 @@ class Error
             throw new \ErrorException($message, 0, $level, $file, $line);
         }
     }
-
 
     public static function exceptionHandler($exception)
     {

@@ -21,5 +21,6 @@ $router->add('', ['controller' => 'Account', 'action' => 'index']);
 $router->add('withdraw', ['controller' => 'Account', 'action' => 'withdraw']);
 
 $router->dispatch($_SERVER['QUERY_STRING']);
+ini_set('session.use_strict_mode', 'On');
 
-
+//phpinfo();

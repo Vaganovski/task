@@ -11,8 +11,10 @@ class Config
 
     const DBNAME = 'bittask';
 
-    const SHOW_ERRORS = false;
+    const SHOW_ERRORS = true;
     
-    const SESSION_LIFETIME = 1800;
+    const SESSION_INACTIVE = 600;
+    
+    const SESSION_REGENERATE = 900;
     
 }

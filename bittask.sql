@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2017 at 11:00 AM
+-- Generation Time: Nov 17, 2017 at 09:01 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.0.25
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `transactions` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `amount` double NOT NULL,
+  `amount` bigint(20) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -40,8 +40,7 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `user_id`, `amount`, `created_at`) VALUES
-(1, 3, 4603911635.78, '2017-11-16 10:43:04'),
-(2, 3, -100, '2017-11-16 10:59:46');
+(1, 3, 4603911636, '2017-11-16 10:43:04');
 
 -- --------------------------------------------------------
 
@@ -53,7 +52,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(191) NOT NULL,
   `password` varchar(191) NOT NULL,
-  `balance` double NOT NULL DEFAULT '0'
+  `balance` bigint(20) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -61,7 +60,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `balance`) VALUES
-(3, 'user', '$2y$10$q0C0ooUE08tSsFu3IVVrBuoG7J5ShHUAd/sSCI.IVCpqmVNzIyt16', 4603911535.78);
+(3, 'user', '$2y$10$q0C0ooUE08tSsFu3IVVrBuoG7J5ShHUAd/sSCI.IVCpqmVNzIyt16', 4603911636);
 
 --
 -- Indexes for dumped tables
@@ -87,7 +86,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `users`
 --

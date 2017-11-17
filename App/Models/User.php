@@ -1,7 +1,5 @@
 <?php
 namespace App\Models;
-use Core\Database;
-use PDO;
 
 class User extends \Core\Model
 {
@@ -13,10 +11,5 @@ class User extends \Core\Model
     
     public $balance;
     
-
-
-    public function getBalance() {
-        return $this->balance;
-    }
     
 }
